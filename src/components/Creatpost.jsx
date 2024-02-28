@@ -18,7 +18,7 @@ function Creatpost(){
         const enteredTitle=title.current.value;
         const enteredBody=body.current.value;
         const enteredReactions=reactions.current.value;
-        const enteredTags=tags.current.value.split(/\s+/);
+        const enteredTags=tags.current.value.split(" ");
         const postData={
             userId:enteredUserId,
             title:enteredTitle,
