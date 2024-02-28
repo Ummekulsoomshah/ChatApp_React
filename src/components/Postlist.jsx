@@ -3,15 +3,14 @@ import Post from './Post';
 import { PostList} from '../store/post-list-store';
 
 function Postlist() {
-    const { postlist } = useContext(postList)
+    const { postlist } = useContext(PostList)
     console.log(postlist)
     return (
     <>
-        {/* {postlist.map((post) => {
-          return console.log(post)
+        {postlist.map((post) => {
+          return <Post key={post.id} post={post} />;
         })}
-      */}
-<Post/>
+     
     </>
     );
 };

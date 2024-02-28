@@ -26,20 +26,20 @@ const PostlistProvider = ({ children }) => {
 
 const DEFAULT_POSTLIST = [
     {
-        id: "p1",
-        title: "This is a post1",
-        content: "This is the content of the post",
-        reactions: 2,
-        userId: "u1",
-        tags: ["t1", "t2"]
+        id: "p1", 
+        title: "Introduction to AI", 
+        content: "Exploring the fascinating world of Artificial Intelligence", 
+        reactions: 10, 
+        userId: "u1", 
+        tags: ["technology", "AI"] 
     },
     {
-        id: "p2",
-        title: "This is a post3",
-        content: "This is the content of the post3",
-        reactions: 2,
-        userId: "u3",
-        tags: ["t3", "t4"]
+        id: "p2", 
+        title: "Machine Learning Basics", 
+        content: "Understanding the fundamentals of machine learning algorithms", 
+        reactions: 5, 
+        userId: "u2", 
+        tags: ["machine learning", "data science"] 
     }
 ];
 
