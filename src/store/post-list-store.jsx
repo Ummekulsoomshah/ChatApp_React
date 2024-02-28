@@ -18,7 +18,7 @@ const postlistReducer = (currPostList, action) => {
         newPostList = [{
             id: Math.random().toString(),
             title: action.payload.postdata.title,
-            body: action.payload.postdata.b,
+            body: action.payload.postdata.body,
             reactions: action.payload.postdata.reactions,
             userId: action.payload.postdata.userId,
             tags: action.payload.postdata.tags

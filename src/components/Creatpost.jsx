@@ -26,7 +26,9 @@ function Creatpost(){
             reactions:enteredReactions,
             tags:enteredTags
         }
+
         addPost(postData);
+        console.log(postData);
         userId.current.value='';
         title.current.value='';
         body.current.value='';
