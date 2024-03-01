@@ -1,10 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PostList } from '../store/post-list-store';
 function Creatpost() {
     const { addPost } = useContext(PostList);
 
-
+const navigate=useNavigate();
 
     const userId = useRef();
     const title = useRef();
@@ -42,6 +43,8 @@ function Creatpost() {
         body.current.value = '';
         reactions.current.value = '';
         tags.current.value = '';
+
+        navigate('/')
     }
 
 

@@ -1,11 +1,12 @@
 
-import { createContext, useReducer ,useState,useEffect} from "react";
+import { createContext, useReducer ,useState,useEffect,} from "react";
 
 export const PostList = createContext({
     postlist: [],
     addPost: () => { },
     dataFetched :false,
-    deletePost: () => { }
+    deletePost: () => { },
+    addinitialPost: () => { },
 });
 
 const postlistReducer = (currPostList, action) => {
@@ -36,6 +37,9 @@ const PostlistProvider = ({ children }) => {
     const deletePost = (postid) => {
         dispatchPostList({ type: "DELETE_POST", payload: { postid, } ,});
     };
+    const addinitialPost = (posts) => {
+        dispatchPostList({ type: "ADD_INITIAL_POST", payload: { posts, } ,});
+    };
 
     useEffect(() => {
       const controller = new AbortController()
@@ -44,7 +48,7 @@ const PostlistProvider = ({ children }) => {
       fetch('https://dummyjson.com/posts', { signal })
         .then(res => res.json())
         .then(data => {
-          dispatchPostList({ type: "ADD_INITIAL_POST", payload: { posts: data.posts, }, });
+        addinitialPost(data.posts)
           setDataFetched(false)
         });
       return () => {
@@ -53,7 +57,7 @@ const PostlistProvider = ({ children }) => {
     }, [])
 
     return (
-        <PostList.Provider value={{ postlist, addPost, deletePost ,dataFetched}}>
+        <PostList.Provider value={{ postlist, addPost, deletePost ,dataFetched,addinitialPost}}>
             {children}
         </PostList.Provider>
     );
