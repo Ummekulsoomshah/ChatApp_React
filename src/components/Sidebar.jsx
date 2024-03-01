@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 function Sidebar() {
 
-
     
     return (
 
@@ -14,7 +13,6 @@ function Sidebar() {
             <hr />
             <ul className="nav nav-pills flex-column mb-auto">
                 <li className="nav-item" onClick={()=>{
-                    console.log("clicked")
                 }}>
                     {/* router application by putting "/ " in anchor tab  */}
                     <Link to="/" className="nav-link text-white " aria-current="page">
@@ -23,7 +21,6 @@ function Sidebar() {
                     </Link>
                 </li>
                 <li onClick={()=>{
-                    console.log("clicked")
                 }}>
                     {/* router applocation by putting "/create-post" in anchor tab  */}
                     <Link to="/create-post" className="nav-link text-white ">

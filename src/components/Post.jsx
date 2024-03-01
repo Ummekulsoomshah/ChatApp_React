@@ -16,7 +16,6 @@ function Post({ post }) {
             <MdDelete />
           </span></h5>
         <p className="card-text">{post.body}</p>
-        {console.log(post.tags)}
         {post.tags.map((tag) => {
           return <span key={tag} className="badge bg-primary hashtag">{tag}</span>
         })}

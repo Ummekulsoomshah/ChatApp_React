@@ -1,86 +1,55 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useRef, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { PostList } from '../store/post-list-store';
+import { Form, redirect } from "react-router-dom"
+
+
 function Creatpost() {
-    const { addPost } = useContext(PostList);
-
-const navigate=useNavigate();
-
-    const userId = useRef();
-    const title = useRef();
-    const body = useRef();
-    const reactions = useRef();
-    const tags = useRef();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const enteredUserId = userId.current.value;
-        const enteredTitle = title.current.value;
-        const enteredBody = body.current.value;
-        const enteredReactions = reactions.current.value;
-        const enteredTags = tags.current.value.split(" ");
-        console.log("sending data")
-        fetch('https://dummyjson.com/posts/add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                userId: enteredUserId,
-                title: enteredTitle,
-                body: enteredBody,
-                reactions: enteredReactions,
-                tags: enteredTags
-            })
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                addPost(data)
-            });
-
-        userId.current.value = '';
-        title.current.value = '';
-        body.current.value = '';
-        reactions.current.value = '';
-        tags.current.value = '';
-
-        navigate('/')
-    }
-
-
-
 
     return (
-        <form className='formarea' onSubmit={handleSubmit}>
+        <Form method="POST" className='formarea'>
             <div className="mb-3">
                 <label htmlFor="userid" className="form-label">UserId</label>
-                <input type="text" ref={userId} className="form-control" id="userid" placeholder='Enter your userId' />
+                <input type="text" name="userid" className="form-control" id="userid" placeholder='Enter your userId' />
 
             </div>
             <div className="mb-3">
                 <label htmlFor="title" className="form-label">Title</label>
-                <input type="text" ref={title} className="form-control" id="title" placeholder='what are you feeling today...' />
+                <input type="text" name="title" className="form-control" id="title" placeholder='what are you feeling today...' />
 
             </div>
             <div className="mb-3">
                 <label htmlFor="body" className="form-label">Body</label>
-                <textarea rows={4} type="text" ref={body} className="form-control" id="body" placeholder='Briefly describe it' />
+                <textarea rows={4} type="text" name="body"  className="form-control" id="body" placeholder='Briefly describe it' />
 
             </div>
             <div className="mb-3">
                 <label htmlFor="reactions" className="form-label">Number of reactions</label>
-                <input type="text" ref={reactions} className="form-control" id="reactions" placeholder='How many peope reaed to this post' />
+                <input type="text" name="reactions"  className="form-control" id="reactions" placeholder='How many peope reaed to this post' />
 
             </div>
             <div className="mb-3">
                 <label htmlFor="tags" className="form-label">Enter tags here</label>
-                <input type="text" ref={tags} className="form-control" id="tags" placeholder='add hashtag and space between them' />
+                <input type="text" name="tags" className="form-control" id="tags" placeholder='add hashtag and space between them' />
 
             </div>
             <button type="submit" className="btn btn-primary">Post</button>
-        </form>)
+        </Form>)
+}
 
 
+export async function creatPostaction(data){  
+    const formData=await data.request.formData()
+    const postData=Object.fromEntries(formData)
+    postData.tags=postData.tags.split(' ')
+    console.log(postData)
+    fetch('https://dummyjson.com/posts/add', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(postData)
+})
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+    });
+    return redirect('/')
 }
 
 export default Creatpost;
