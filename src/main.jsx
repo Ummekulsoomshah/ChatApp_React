@@ -1,25 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import { RouterProvider ,createBrowserRouter} from 'react-router-dom'
-import Creatpost, { creatPostaction } from './components/Creatpost.jsx'
-import Postlist , {postLoader} from './components/Postlist.jsx'
-
-
-const router = createBrowserRouter([
-  {
-    path:"/",
-    element:<App/>,
-    children:[
-      {path:"/", element:<Postlist/>,loader:postLoader},
-      {path:"/create-post", element:<Creatpost/>, action:creatPostaction} 
-    ]
-
-  }
-])
+import { Provider } from 'react-redux'
+import store from "./redux/Store"
+import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
-      
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
 )

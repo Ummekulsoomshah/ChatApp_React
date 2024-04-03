@@ -1,17 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useContext } from 'react';
 import { MdDelete } from "react-icons/md";
-import { PostList} from '../store/post-list-store';
-
-
+import { deletePost } from '../redux/actions/productAction';
+import { useDispatch } from 'react-redux';
 function Post({ post }) {
-  const {deletePost}=useContext(PostList);
+  const dispatch = useDispatch();
+  const postid = post.id;
   return (
     <div className="card" style={{ width: "30rem", margin: "20px" }}>
       <div className="card-body">
         <h5 className="card-title">{post.title}
           <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" 
-          onClick={()=>deletePost(post.id)}
+          onClick={()=>dispatch(deletePost(postid))}
           >
             <MdDelete />
           </span></h5>

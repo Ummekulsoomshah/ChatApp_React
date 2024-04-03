@@ -1,0 +1,5 @@
+export const ActionTypes={
+    ADD_INITIAL_POST:"ADD_INITIAL_POST",
+    ADD_POST:"ADD_POST",
+    DELETE_POST:"DELETE_POST",
+}
